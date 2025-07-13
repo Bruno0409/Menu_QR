@@ -1,0 +1,286 @@
+/* =====================================================
+    VARIÁVEIS GLOBAIS
+===================================================== */
+:root {
+    /* Cores principais */
+  --cor-fundo: #242424;
+  --cor-texto: #f5f5f5;
+  --cor-card: #f1f1f1;
+  --cor-nome-prato: #d61e1e;
+  --cor-descricao: #191919;
+
+  /* Tipografia */
+  --fonte-principal: 'Roboto', sans-serif;
+
+  /* Sombra padrão */
+  --box-shadow: 0 0 10px var(--cor-sombra-leve);
+}
+
+/* =====================================================
+    RESET E BASE
+===================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: var(--fonte-principal);
+  background-color: var(--cor-fundo );
+}
+
+/* =====================================================
+    TIPOGRAFIA
+===================================================== */
+h1 {
+    font-size: 50px; /* ou use px, ex: 40px */
+    font-weight: bold;
+    line-height: 1.2;
+    color: var(--cor-texto); /* opcional, se usar variáveis */
+    text-align: center; /* se quiser centralizado */
+}
+
+h2 {
+    margin-top: 40px;
+    margin-bottom: 30px;
+    font-size: 30px; /* ou use px, ex: 40px */
+    font-weight: bold;
+    line-height: 1.2;
+    color: var(--cor-texto); /* opcional, se usar variáveis */
+    text-align: center; /* se quiser centralizado */
+}
+h3 {
+    margin-top: 10px;
+    font-size: 25px; /* ou use px, ex: 40px */
+    margin-bottom: 20px;
+    font-weight: bold;
+    line-height: 1.2;
+    color: var(--cor-nome-prato); /* opcional, se usar variáveis */
+    text-align: center; /* se quiser centralizado */
+}
+
+p {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    color: var(--cor-descricao); /* opcional, se usar variáveis */
+    text-align: center; /* se quiser centralizado */
+}
+
+/* =====================================================
+    HEADER
+===================================================== */
+.site-header {
+    background-color: var(--cor-primaria);
+    color: var(--cor-texto);
+    min-height: 160px;
+    font-size: 4rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+
+/* =====================================================
+    CONTAINER GERAL
+===================================================== */
+.container {
+    max-width: 480px;
+    padding: 20px;
+    background-color: var(--cor-primaria);
+}
+
+/* =====================================================
+    CARROUSEL
+===================================================== */
+
+
+.carousel {
+    position: relative;
+    width: 100vw;
+    height: 400px;
+    overflow: hidden;
+}
+
+.carousel-images {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    height: 100%;
+    object-fit: contain;
+}
+
+.carousel-images img {
+    width: 100vw;
+    height: 100%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.carousel-dots {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dot.active {
+    background-color: #fff;
+}
+
+@media (max-width: 1024px) {
+.carousel {
+    height: auto; /* deixa a altura se ajustar automaticamente */
+}
+
+.carousel-images img {
+    height: auto;
+    object-fit: contain; /* mostra a imagem inteira sem cortar */
+}
+}
+
+
+/* =====================================================
+    SANDUÍCHE
+===================================================== */
+.sanduiches-cards {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 20px;
+    scroll-padding: 0 40vw;
+    perspective: 1000px; /* Efeito 3D */
+}
+
+.card {
+    position: relative;
+    flex: 0 0 70vw;
+    max-width: 400px; 
+    height: 500px; /* altura fixa */
+    background-color: var(--cor-card);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    scroll-snap-align: center;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    transform: scale(0.85);
+    opacity: 0.6;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    /* REMOVA o padding-bottom, ou ajuste para zero */
+    padding-bottom: 0; 
+}
+
+
+.card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.card-info {
+    padding: 16px;
+    text-align: center;
+    /* Para não "empurrar" o botão para baixo, remova margens extras em p/h2 se houver */
+    margin-bottom: 0;
+    flex-grow: 1; /* faz o conteúdo expandir para ocupar o espaço disponível */
+}
+
+
+.card-info h2 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 1.4rem;
+}
+
+.card-info p {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    color: var(--cor-descricao);
+}
+
+.btn-comprar {
+    position: absolute;
+    bottom: 0; /* sem margem inferior */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #3d3d3d;
+    color: white;
+    border: none;
+    width: 40%;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    border-radius: 8px 8px 0 0;
+    font-weight: bold;
+    font-size: 1rem;
+    text-align: center;
+    cursor: pointer;
+}
+
+/* Card centralizado aparece maior */
+.sanduiches-cards::-webkit-scrollbar {
+    display: none;
+}
+
+@media (min-width: 600px) {
+.card {
+    flex: 0 0 40vw;
+}
+}
+
+.sanduiches-section {
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    opacity: 1;
+    transform: scale(1);
+    z-index: 1;
+}
+
+.sanduiches-section.is-faded {
+    background-color: rgba(0, 0, 0, 0.8); /* Preto 40% transparente = fumê */
+    backdrop-filter: blur(10px);          /* Efeito vidro */
+    -webkit-backdrop-filter: blur(10px);  /* Compatibilidade Safari */
+    opacity: 0.4;
+    z-index: 0;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+.container,
+.sanduiches-section {
+    max-width: 100vw;
+    width: 100%;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.sanduiches-cards {
+    padding-left: 0;
+    padding-right: 0;
+    scroll-padding-left: 50vw;
+    scroll-padding-right: 50vw;
+}
+
+.card {
+    flex: 0 0 50vw; 
+    max-width: none;
+}
+}
+
+
