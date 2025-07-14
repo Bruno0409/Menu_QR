@@ -89,27 +89,23 @@
 
 
 
-// planilha 
-
-        // IDs e URLs da planilha
-const SHEET_ID = "1X1LhYuSAm2Nmji2eWIYY4LGJLEBLPqwRLBmn4XvS46A"; // seu ID da planilha
+const SHEET_ID = "1X1LhYuSAm2Nmji2eWIYY4LGJLEBLPqwRLBmn4XvS46A";
 const API_KEY = "AIzaSyDKEdvIIQ9xk-wvxofPP3YW4wR28V7Zw1A";
 
-// Endpoints da API oficial:
-const ENDPOINT_ESTILO = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/Estilo!A1:Z1?key=${API_KEY}`;
-const ENDPOINT_PRODUTOS = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/Produtos!A2:E1000?key=${API_KEY}`;
+const ENDPOINT_ESTILO = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/Estilo!A1:Z2?key=${API_KEY}`;
+const ENDPOINT_PRODUTOS = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/testeMenu!A2:E1000?key=${API_KEY}`;
 
 async function init() {
   try {
     // 1‑ Carregar estilo
     const resEstilo = await fetch(ENDPOINT_ESTILO);
     const jsonEstilo = await resEstilo.json();
-    const headers = jsonEstilo.values[0];        // ex: ["corTextoBig", ... ,"img2"]
-    const values = jsonEstilo.values[1];         // ex: ["#FF0000", ... , "https://..."]
+    const headers = jsonEstilo.values[0];
+    const values = jsonEstilo.values[1];
     const estilo = {};
     headers.forEach((h, i) => estilo[h] = values[i]);
 
-    // Aplica os estilos globais
+    // Aplica estilos
     document.querySelectorAll('.titulo-principal').forEach(el => el.style.color = estilo.corTextoBig);
     document.querySelectorAll('.titulo-card').forEach(el => el.style.color = estilo.corNomePrato);
     document.querySelectorAll('.btn-preco').forEach(el => {
@@ -121,7 +117,7 @@ async function init() {
     document.querySelectorAll('.card').forEach(el => el.style.backgroundColor = estilo.corCard);
     document.querySelectorAll('.imgCard').forEach(el => el.style.backgroundColor = estilo.corCard);
 
-    // Configura hero
+    // Hero
     const heroImg1 = document.querySelector('.img1');
     const heroImg2 = document.querySelector('.img2');
     if (estilo.img1 && heroImg1) heroImg1.src = estilo.img1;
@@ -134,7 +130,6 @@ async function init() {
 
     prodRows.forEach(row => {
       const [categoria, imagem, titulo, descricao, preco] = row;
-      // tratar a linha
       adicionarCard({ categoria, imagem, titulo, descricao, preco });
     });
   }
@@ -169,3 +164,4 @@ function adicionarCard(item) {
 }
 
 init();
+
