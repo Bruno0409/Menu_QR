@@ -199,7 +199,7 @@ function adicionarCard(item, estilo) {
   descricao.style.color = estilo.corDescricao;
 
   const botao = document.createElement("button");
-  botao.classList.add("btn-preco");
+  botao.classList.add("btn-preco, btn-comprar");
   botao.textContent = `R$: ${item.preco}`;
   botao.style.backgroundColor = estilo.corNomePrato;
   botao.style.borderColor = estilo.corNomePrato;
