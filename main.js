@@ -177,6 +177,7 @@ function adicionarCard(item, estilo) {
   card.classList.add("card");
   card.style.backgroundColor = estilo.corCard;
   card.style.position = "relative";
+  card.style.paddingBottom = "50px";
 
   // Imagem
   const img = document.createElement("img");
