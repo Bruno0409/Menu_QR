@@ -142,10 +142,15 @@ setTimeout(() => {
     container.dispatchEvent(event);
   });
 }, 100); // espera para garantir que o layout atualize
-    
+     
+    document.body.style.visibility = 'visible';
+
   }
   catch(err) {
     console.error("Erro ao carregar dados da planilha:", err);
+  } finally {
+    // ✅ Garante que o body sempre apareça, mesmo se der erro
+    document.body.style.visibility = 'visible';
   }
 }
 
@@ -215,5 +220,7 @@ function adicionarCard(item, estilo) {
 
 
 init();
+
+document.body.style.visibility = 'visible';
 
 
