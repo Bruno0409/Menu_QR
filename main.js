@@ -141,13 +141,14 @@ async function init() {
 
 function adicionarCard(item) {
   const categorias = {
-    "sanduiches": document.querySelectorAll(".sanduiches-section")[0],
-    "Hot Dog": document.querySelectorAll(".sanduiches-section")[1],
-    "Acompanhamentos": document.querySelectorAll(".sanduiches-section")[2],
-    "Pizzas": document.querySelectorAll(".sanduiches-section")[3],
-    "Bebidas": document.querySelectorAll(".sanduiches-section")[4],
-    "Sobremesas": document.querySelectorAll(".sanduiches-section")[5],
-  };
+  "sanduiches": document.querySelectorAll(".sanduiches-section")[0],
+  "hotdog": document.querySelectorAll(".sanduiches-section")[1],
+  "acompanhamentos": document.querySelectorAll(".sanduiches-section")[2],
+  "pizzas": document.querySelectorAll(".sanduiches-section")[3],
+  "bebidas": document.querySelectorAll(".sanduiches-section")[4],
+  "sobremesas": document.querySelectorAll(".sanduiches-section")[5],
+};
+
   const container = categorias[item.categoria]?.querySelector(".sanduiches-cards");
   if (!container) return;
 
