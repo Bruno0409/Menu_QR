@@ -86,3 +86,86 @@
     currentIndex = (currentIndex + 1) % dots.length;
     updateCarousel();
     }, 5000);
+
+
+
+// planilha 
+
+        // IDs e URLs da planilha
+const SHEET_ID = "1X1LhYuSAm2Nmji2eWIYY4LGJLEBLPqwRLBmn4XvS46A"; // seu ID da planilha
+const API_KEY = "AIzaSyDKEdvIIQ9xk-wvxofPP3YW4wR28V7Zw1A";
+
+// Endpoints da API oficial:
+const ENDPOINT_ESTILO = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/Estilo!A1:Z1?key=${API_KEY}`;
+const ENDPOINT_PRODUTOS = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/Produtos!A2:E1000?key=${API_KEY}`;
+
+async function init() {
+  try {
+    // 1‑ Carregar estilo
+    const resEstilo = await fetch(ENDPOINT_ESTILO);
+    const jsonEstilo = await resEstilo.json();
+    const headers = jsonEstilo.values[0];        // ex: ["corTextoBig", ... ,"img2"]
+    const values = jsonEstilo.values[1];         // ex: ["#FF0000", ... , "https://..."]
+    const estilo = {};
+    headers.forEach((h, i) => estilo[h] = values[i]);
+
+    // Aplica os estilos globais
+    document.querySelectorAll('.titulo-principal').forEach(el => el.style.color = estilo.corTextoBig);
+    document.querySelectorAll('.titulo-card').forEach(el => el.style.color = estilo.corNomePrato);
+    document.querySelectorAll('.btn-preco').forEach(el => {
+      el.style.backgroundColor = estilo.corNomePrato;
+      el.style.borderColor = estilo.corNomePrato;
+    });
+    document.querySelectorAll('.texto-descricao').forEach(el => el.style.color = estilo.corDescricao);
+    document.body.style.backgroundColor = estilo.corFundo;
+    document.querySelectorAll('.card').forEach(el => el.style.backgroundColor = estilo.corCard);
+    document.querySelectorAll('.imgCard').forEach(el => el.style.backgroundColor = estilo.corCard);
+
+    // Configura hero
+    const heroImg1 = document.querySelector('.img1');
+    const heroImg2 = document.querySelector('.img2');
+    if (estilo.img1 && heroImg1) heroImg1.src = estilo.img1;
+    if (estilo.img2 && heroImg2) heroImg2.src = estilo.img2;
+
+    // 2‑ Carregar produtos
+    const resProd = await fetch(ENDPOINT_PRODUTOS);
+    const jsonProd = await resProd.json();
+    const prodRows = jsonProd.values || [];
+
+    prodRows.forEach(row => {
+      const [categoria, imagem, titulo, descricao, preco] = row;
+      // tratar a linha
+      adicionarCard({ categoria, imagem, titulo, descricao, preco });
+    });
+  }
+  catch(err) {
+    console.error("Erro ao carregar dados da planilha:", err);
+  }
+}
+
+function adicionarCard(item) {
+  const categorias = {
+    "Sanduíches": document.querySelectorAll(".sanduiches-section")[0],
+    "Hot Dog": document.querySelectorAll(".sanduiches-section")[1],
+    "Acompanhamentos": document.querySelectorAll(".sanduiches-section")[2],
+    "Pizzas": document.querySelectorAll(".sanduiches-section")[3],
+    "Bebidas": document.querySelectorAll(".sanduiches-section")[4],
+    "Sobremesas": document.querySelectorAll(".sanduiches-section")[5],
+  };
+  const container = categorias[item.categoria]?.querySelector(".sanduiches-cards");
+  if (!container) return;
+
+  const card = `
+    <div class="card">
+      <img class="imgCard" src="${item.imagem}" alt="${item.titulo}" />
+      <div class="card-info">
+        <h3 class="titulo-card">${item.titulo}</h3>
+        <p class="texto-descricao">${item.descricao}</p>
+        <button class="btn-preco">R$: ${item.preco}</button>          
+      </div>
+    </div>
+  `;
+  container.innerHTML += card;
+}
+
+init();
