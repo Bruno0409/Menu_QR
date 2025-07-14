@@ -3,71 +3,68 @@
 ===================================================== */
 :root {
     /* Cores principais */
-  --cor-fundo: #242424;
-  --cor-texto: #f5f5f5;
-  --cor-card: #f1f1f1;
-  --cor-nome-prato: #d61e1e;
-  --cor-descricao: #191919;
+    --cor-fundo: #191919;
+    --cor-texto: #fff;
+    --cor-card: #fff;
+    --cor-nome-prato: #d61e1e;
+    --cor-descricao: #191919;
 
   /* Tipografia */
-  --fonte-principal: 'Roboto', sans-serif;
-
-  /* Sombra padrão */
-  --box-shadow: 0 0 10px var(--cor-sombra-leve);
+    --fonte-principal: 'Roboto', sans-serif;
 }
 
 /* =====================================================
     RESET E BASE
 ===================================================== */
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 html, body {
-  height: 100%;
-  font-family: var(--fonte-principal);
-  background-color: var(--cor-fundo );
+    height: 100%;
+    font-family: var(--fonte-principal);
+    background-color: var(--cor-fundo);
 }
 
 /* =====================================================
     TIPOGRAFIA
 ===================================================== */
 h1 {
-    font-size: 50px; /* ou use px, ex: 40px */
+    font-size: 50px; 
     font-weight: bold;
     line-height: 1.2;
-    color: var(--cor-texto); /* opcional, se usar variáveis */
-    text-align: center; /* se quiser centralizado */
+    color: var(--cor-texto); 
+    text-align: center; 
 }
 
 h2 {
     margin-top: 40px;
     margin-bottom: 30px;
-    font-size: 30px; /* ou use px, ex: 40px */
+    font-size: 30px; 
     font-weight: bold;
     line-height: 1.2;
-    color: var(--cor-texto); /* opcional, se usar variáveis */
-    text-align: center; /* se quiser centralizado */
+    color: var(--cor-texto); 
+    text-align: center; 
 }
 h3 {
     margin-top: 10px;
-    font-size: 25px; /* ou use px, ex: 40px */
+    font-size: 25px; 
     margin-bottom: 10px;
     font-weight: bold;
     line-height: 1.2;
-    color: var(--cor-nome-prato); /* opcional, se usar variáveis */
-    text-align: center; /* se quiser centralizado */
+    color: var(--cor-nome-prato); 
+    text-align: center; 
 }
 
 p {
     margin-top: 10px;
     margin-bottom: 20px;
     line-height: 1.2;
-    color: var(--cor-descricao); /* opcional, se usar variáveis */
-    text-align: center; /* se quiser centralizado */
-}
+    color: var(--cor-descricao); 
+    text-align: center; 
+}    
 
 /* =====================================================
     HEADER
@@ -142,14 +139,14 @@ p {
     background-color: #fff;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 2560px) {
 .carousel {
-    height: auto; /* deixa a altura se ajustar automaticamente */
+    height: auto; 
 }
 
 .carousel-images img {
     height: auto;
-    object-fit: contain; /* mostra a imagem inteira sem cortar */
+    object-fit: contain; 
 }
 }
 
@@ -163,14 +160,14 @@ p {
     scroll-snap-type: x mandatory;
     padding-bottom: 20px;
     scroll-padding: 0 40vw;
-    perspective: 1000px; /* Efeito 3D */
+    perspective: 1000px; 
 }
 
 .card {
     position: relative;
     flex: 0 0 70vw;
     max-width: 400px; 
-    height: 500px; /* altura fixa */
+    height: 500px; 
     background-color: var(--cor-card);
     border-radius: 12px;
     box-shadow: 0 4px 16px rgba(0,0,0,0.1);
@@ -181,7 +178,6 @@ p {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    /* REMOVA o padding-bottom, ou ajuste para zero */
     padding-bottom: 0; 
 }
 
@@ -197,9 +193,8 @@ p {
 .card-info {
     padding: 16px;
     text-align: center;
-    /* Para não "empurrar" o botão para baixo, remova margens extras em p/h2 se houver */
     margin-bottom: 0;
-    flex-grow: 1; /* faz o conteúdo expandir para ocupar o espaço disponível */
+    flex-grow: 1; 
 }
 
 
@@ -217,11 +212,11 @@ p {
 
 .btn-comprar {
     position: absolute;
-    bottom: 0; /* sem margem inferior */
+    bottom: 0; 
     left: 50%;
     transform: translateX(-50%);
-    background-color: #3d3d3d;
-    color: white;
+    background-color: var(--cor-nome-prato);
+    color: var(--cor-texto);
     border: none;
     width: 40%;
     box-sizing: border-box;
@@ -238,7 +233,7 @@ p {
     display: none;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 768px) {
 .card {
     flex: 0 0 40vw;
 }
@@ -252,14 +247,14 @@ p {
 }
 
 .sanduiches-section.is-faded {
-    background-color: rgba(0, 0, 0, 0.8); /* Preto 40% transparente = fumê */
-    backdrop-filter: blur(10px);          /* Efeito vidro */
-    -webkit-backdrop-filter: blur(10px);  /* Compatibilidade Safari */
+    background-color: rgba(0, 0, 0, 0.8); 
+    backdrop-filter: blur(10px);          
+    -webkit-backdrop-filter: blur(10px);  
     opacity: 0.4;
     z-index: 0;
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 768px) and (max-width: 2560px) {
 .container,
 .sanduiches-section {
     max-width: 100vw;
@@ -281,6 +276,51 @@ p {
     flex: 0 0 50vw; 
     max-width: none;
 }
+}
+
+.footer {
+    background-color: var(--cor-fundo);
+    padding: 40px 20px 20px;
+    text-align: center;
+    color: var(--cor-texto);
+}
+
+.footer__title {
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: var(--cor-texto);
+}
+
+.footer__links {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 20px;
+}
+
+.footer__links a {
+    font-size: 28px;
+    color: var(--cor-texto);
+    transition: color 0.3s ease;
+}
+
+.footer__credit {
+    font-size: 14px;
+    color: var(--cor-texto);
+}
+
+.footer__credit a {
+    color: var(--cor-texto);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--cor-texto);
+}
+
+.footer__address {
+    font-size: 16px;
+    color: var(--cor-texto);
+    margin-top: -10px;
+    margin-bottom: 20px;
 }
 
 
