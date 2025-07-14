@@ -203,6 +203,7 @@ function adicionarCard(item, estilo) {
   botao.textContent = `R$: ${item.preco}`;
   botao.style.backgroundColor = estilo.corNomePrato;
   botao.style.borderColor = estilo.corNomePrato;
+  botao.style.color = "#fff";
 
   // Montar estrutura
   info.appendChild(titulo);
