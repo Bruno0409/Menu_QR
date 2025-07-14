@@ -23,7 +23,7 @@
 }
 
 html, body {
-    visibility: hidden;
+    
     height: 100%;
     font-family: var(--fonte-principal);
     background-color: var(--cor-fundo);

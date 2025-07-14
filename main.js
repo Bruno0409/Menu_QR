@@ -143,7 +143,7 @@ setTimeout(() => {
   });
 }, 100); // espera para garantir que o layout atualize
      
-    document.body.style.visibility = 'visible';
+    
     document.body.style.opacity = '1';
 
   }
@@ -151,7 +151,7 @@ setTimeout(() => {
     console.error("Erro ao carregar dados da planilha:", err);
   } finally {
     // ✅ Garante que o body sempre apareça, mesmo se der erro
-    document.body.style.visibility = 'visible';
+  
     document.body.style.opacity = '1';
   }
 }
