@@ -164,24 +164,54 @@ function adicionarCard(item, estilo) {
     .normalize('NFD').replace(/[\u0300-\u036f]/g, "")
     .replace(/\s/g, "");
 
-    console.log("Adicionando card:", item.titulo, "Categoria normalizada:", cat);
+  console.log("Adicionando card:", item.titulo, "Categoria normalizada:", cat);
 
   const container = categorias[cat]?.querySelector(".sanduiches-cards");
   if (!container) {
     console.warn("Container não encontrado para categoria:", cat);
     return;
   }
-  const card = `
-    <div class="card" style="background-color: ${estilo.corCard};">
-      <img class="imgCard" src="${item.imagem}" alt="${item.titulo}" style="background-color: ${estilo.corCard};" />
-      <div class="card-info">
-        <h3 class="titulo-card" style="color: ${estilo.corNomePrato};">${item.titulo}</h3>
-        <p class="texto-descricao" style="color: ${estilo.corDescricao};">${item.descricao}</p>
-        <button class="btn-preco" style="background-color: ${estilo.corNomePrato}; border-color: ${estilo.corNomePrato};">R$: ${item.preco}</button>
-      </div>
-    </div>
-  `;
-  container.innerHTML += card;
+
+  // Criar o card
+  const card = document.createElement("div");
+  card.classList.add("card");
+  card.style.backgroundColor = estilo.corCard;
+
+  // Imagem
+  const img = document.createElement("img");
+  img.classList.add("imgCard");
+  img.src = item.imagem;
+  img.alt = item.titulo;
+  img.style.backgroundColor = estilo.corCard;
+
+  // Informações
+  const info = document.createElement("div");
+  info.classList.add("card-info");
+
+  const titulo = document.createElement("h3");
+  titulo.classList.add("titulo-card");
+  titulo.textContent = item.titulo;
+  titulo.style.color = estilo.corNomePrato;
+
+  const descricao = document.createElement("p");
+  descricao.classList.add("texto-descricao");
+  descricao.textContent = item.descricao;
+  descricao.style.color = estilo.corDescricao;
+
+  const botao = document.createElement("button");
+  botao.classList.add("btn-preco");
+  botao.textContent = `R$: ${item.preco}`;
+  botao.style.backgroundColor = estilo.corNomePrato;
+  botao.style.borderColor = estilo.corNomePrato;
+
+  // Montar estrutura
+  info.appendChild(titulo);
+  info.appendChild(descricao);
+  info.appendChild(botao);
+
+  card.appendChild(img);
+  card.appendChild(info);
+  container.appendChild(card);
 }
 
 init();
