@@ -134,6 +134,14 @@ async function init() {
       const [categoria, imagem, titulo, descricao, preco] = row;
       adicionarCard({ categoria, imagem, titulo, descricao, preco }, estilo);
     });
+    // ✅ Depois que todos os cards foram adicionados
+setTimeout(() => {
+  document.querySelectorAll(".sanduiches-cards").forEach((container) => {
+    const event = new Event("scroll");
+    container.dispatchEvent(event);
+  });
+}, 100); // espera para garantir que o layout atualize
+    
   }
   catch(err) {
     console.error("Erro ao carregar dados da planilha:", err);
