@@ -90,6 +90,7 @@
 
 
     // Planilha
+// Planilha
 const SHEET_ID = "1X1LhYuSAm2Nmji2eWIYY4LGJLEBLPqwRLBmn4XvS46A";
 const API_KEY = "AIzaSyDKEdvIIQ9xk-wvxofPP3YW4wR28V7Zw1A";
 
@@ -106,7 +107,7 @@ async function init() {
     const estilo = {};
     headers.forEach((h, i) => estilo[h] = values[i]);
 
-    // Aplica estilos
+    // Aplica estilos globais
     document.querySelectorAll('.titulo-principal').forEach(el => el.style.color = estilo.corTextoBig);
     document.querySelectorAll('.titulo-card').forEach(el => el.style.color = estilo.corNomePrato);
     document.querySelectorAll('.btn-preco').forEach(el => {
@@ -131,7 +132,7 @@ async function init() {
 
     prodRows.forEach(row => {
       const [categoria, imagem, titulo, descricao, preco] = row;
-      adicionarCard({ categoria, imagem, titulo, descricao, preco });
+      adicionarCard({ categoria, imagem, titulo, descricao, preco }, estilo);
     });
   }
   catch(err) {
@@ -139,28 +140,31 @@ async function init() {
   }
 }
 
-function adicionarCard(item) {
+function adicionarCard(item, estilo) {
   const categorias = {
-  "sanduiches": document.querySelectorAll(".sanduiches-section")[0],
-  "hotdog": document.querySelectorAll(".sanduiches-section")[1],
-  "acompanhamentos": document.querySelectorAll(".sanduiches-section")[2],
-  "pizzas": document.querySelectorAll(".sanduiches-section")[3],
-  "bebidas": document.querySelectorAll(".sanduiches-section")[4],
-  "sobremesas": document.querySelectorAll(".sanduiches-section")[5],
-};
+    "sanduiches": document.querySelectorAll(".sanduiches-section")[0],
+    "hotdog": document.querySelectorAll(".sanduiches-section")[1],
+    "acompanhamentos": document.querySelectorAll(".sanduiches-section")[2],
+    "pizzas": document.querySelectorAll(".sanduiches-section")[3],
+    "bebidas": document.querySelectorAll(".sanduiches-section")[4],
+    "sobremesas": document.querySelectorAll(".sanduiches-section")[5],
+  };
 
-  const cat = item.categoria.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").replace(/\s/g, "");
-const container = categorias[cat]?.querySelector(".sanduiches-cards");
+  // Normaliza a categoria para bater com as chaves do objeto
+  const cat = item.categoria.toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s/g, "");
 
+  const container = categorias[cat]?.querySelector(".sanduiches-cards");
   if (!container) return;
 
   const card = `
-    <div class="card">
-      <img class="imgCard" src="${item.imagem}" alt="${item.titulo}" />
+    <div class="card" style="background-color: ${estilo.corCard};">
+      <img class="imgCard" src="${item.imagem}" alt="${item.titulo}" style="background-color: ${estilo.corCard};" />
       <div class="card-info">
-        <h3 class="titulo-card">${item.titulo}</h3>
-        <p class="texto-descricao">${item.descricao}</p>
-        <button class="btn-preco">R$: ${item.preco}</button>          
+        <h3 class="titulo-card" style="color: ${estilo.corNomePrato};">${item.titulo}</h3>
+        <p class="texto-descricao" style="color: ${estilo.corDescricao};">${item.descricao}</p>
+        <button class="btn-preco" style="background-color: ${estilo.corNomePrato}; border-color: ${estilo.corNomePrato};">R$: ${item.preco}</button>
       </div>
     </div>
   `;
@@ -168,4 +172,5 @@ const container = categorias[cat]?.querySelector(".sanduiches-cards");
 }
 
 init();
+
 
