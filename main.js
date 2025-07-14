@@ -93,7 +93,7 @@ const SHEET_ID = "1X1LhYuSAm2Nmji2eWIYY4LGJLEBLPqwRLBmn4XvS46A";
 const API_KEY = "AIzaSyDKEdvIIQ9xk-wvxofPP3YW4wR28V7Zw1A";
 
 const ENDPOINT_ESTILO = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/Estilo!A1:Z2?key=${API_KEY}`;
-const ENDPOINT_PRODUTOS = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/testeMenu!A2:E1000?key=${API_KEY}`;
+const ENDPOINT_PRODUTOS = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/testemenu!A2:E1000?key=${API_KEY}`;
 
 async function init() {
   try {
@@ -140,7 +140,7 @@ async function init() {
 
 function adicionarCard(item) {
   const categorias = {
-    "Sanduíches": document.querySelectorAll(".sanduiches-section")[0],
+    "sanduiches": document.querySelectorAll(".sanduiches-section")[0],
     "Hot Dog": document.querySelectorAll(".sanduiches-section")[1],
     "Acompanhamentos": document.querySelectorAll(".sanduiches-section")[2],
     "Pizzas": document.querySelectorAll(".sanduiches-section")[3],
