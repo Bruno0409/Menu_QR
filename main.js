@@ -1,8 +1,9 @@
 // Destaque dos cards centrais em cada seção de sanduíches
     document.querySelectorAll(".sanduiches-cards").forEach((container) => {
-    const cards = container.querySelectorAll(".card");
+    
 
     function updateActiveCard() {
+        const cards = container.querySelectorAll(".card");
         const containerRect = container.getBoundingClientRect();
         let closestCard = null;
         let closestDistance = Infinity;
