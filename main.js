@@ -159,12 +159,10 @@ function adicionarCard(item, estilo) {
     "sobremesas": document.querySelectorAll(".sanduiches-section")[5],
   };
 
-  // Normaliza a categoria para bater com as chaves do objeto
+  // Normaliza a categoria
   const cat = item.categoria.toLowerCase()
     .normalize('NFD').replace(/[\u0300-\u036f]/g, "")
     .replace(/\s/g, "");
-
-  console.log("Adicionando card:", item.titulo, "Categoria normalizada:", cat);
 
   const container = categorias[cat]?.querySelector(".sanduiches-cards");
   if (!container) {
@@ -172,21 +170,18 @@ function adicionarCard(item, estilo) {
     return;
   }
 
-  // Criar o card
   const card = document.createElement("div");
   card.classList.add("card");
   card.style.backgroundColor = estilo.corCard;
-  card.style.position = "relative";
-  card.style.paddingBottom = "50px";
+  card.style.position = "relative";          // <- aqui, importante!
+  card.style.paddingBottom = "60px";         // <- aqui também!
 
-  // Imagem
   const img = document.createElement("img");
   img.classList.add("imgCard");
   img.src = item.imagem;
   img.alt = item.titulo;
   img.style.backgroundColor = estilo.corCard;
 
-  // Informações
   const info = document.createElement("div");
   info.classList.add("card-info");
 
@@ -200,14 +195,15 @@ function adicionarCard(item, estilo) {
   descricao.textContent = item.descricao;
   descricao.style.color = estilo.corDescricao;
 
+  // Aqui você adiciona o botão com as duas classes e estilos
   const botao = document.createElement("button");
-  botao.classList.add("btn-preco, btn-comprar");
+  botao.classList.add("btn-preco", "btn-comprar");
   botao.textContent = `R$: ${item.preco}`;
   botao.style.backgroundColor = estilo.corNomePrato;
   botao.style.borderColor = estilo.corNomePrato;
-  
+  botao.style.color = "#fff";
 
-  // Montar estrutura
+  // Montagem da estrutura do card
   info.appendChild(titulo);
   info.appendChild(descricao);
   info.appendChild(botao);
@@ -216,6 +212,7 @@ function adicionarCard(item, estilo) {
   card.appendChild(info);
   container.appendChild(card);
 }
+
 
 init();
 

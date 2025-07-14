@@ -165,6 +165,8 @@ p {
 
 .card {
     position: relative;
+    box-sizing: border-box;
+    min-height: 200px;
     flex: 0 0 70vw;
     max-width: 400px; 
     height: 500px; 
@@ -178,7 +180,7 @@ p {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    padding-bottom: 0; 
+    padding-bottom: 60px; 
 }
 
 
