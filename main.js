@@ -89,7 +89,7 @@
 
 
 
-    // Planilha
+ 
 // Planilha
 const SHEET_ID = "1X1LhYuSAm2Nmji2eWIYY4LGJLEBLPqwRLBmn4XvS46A";
 const API_KEY = "AIzaSyDKEdvIIQ9xk-wvxofPP3YW4wR28V7Zw1A";
@@ -155,9 +155,13 @@ function adicionarCard(item, estilo) {
     .normalize('NFD').replace(/[\u0300-\u036f]/g, "")
     .replace(/\s/g, "");
 
-  const container = categorias[cat]?.querySelector(".sanduiches-cards");
-  if (!container) return;
+    console.log("Adicionando card:", item.titulo, "Categoria normalizada:", cat);
 
+  const container = categorias[cat]?.querySelector(".sanduiches-cards");
+  if (!container) {
+    console.warn("Container não encontrado para categoria:", cat);
+    return;
+  }
   const card = `
     <div class="card" style="background-color: ${estilo.corCard};">
       <img class="imgCard" src="${item.imagem}" alt="${item.titulo}" style="background-color: ${estilo.corCard};" />
