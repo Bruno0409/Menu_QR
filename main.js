@@ -149,7 +149,9 @@ function adicionarCard(item) {
   "sobremesas": document.querySelectorAll(".sanduiches-section")[5],
 };
 
-  const container = categorias[item.categoria]?.querySelector(".sanduiches-cards");
+  const cat = item.categoria.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").replace(/\s/g, "");
+const container = categorias[cat]?.querySelector(".sanduiches-cards");
+
   if (!container) return;
 
   const card = `
