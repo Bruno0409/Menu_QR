@@ -176,6 +176,7 @@ function adicionarCard(item, estilo) {
   const card = document.createElement("div");
   card.classList.add("card");
   card.style.backgroundColor = estilo.corCard;
+  card.style.position = "relative";
 
   // Imagem
   const img = document.createElement("img");
@@ -203,7 +204,7 @@ function adicionarCard(item, estilo) {
   botao.textContent = `R$: ${item.preco}`;
   botao.style.backgroundColor = estilo.corNomePrato;
   botao.style.borderColor = estilo.corNomePrato;
-  botao.style.color = "#fff";
+  
 
   // Montar estrutura
   info.appendChild(titulo);
