@@ -198,6 +198,11 @@ function adicionarCard(item, estilo) {
   // Aqui você adiciona o botão com as duas classes e estilos
   const botao = document.createElement("button");
   botao.classList.add("btn-preco", "btn-comprar");
+
+  const precoFormatado = Number(
+    item.preco.toString().replace(",", ".")
+  ).toFixed(2).replace(".", ",");
+  
   botao.textContent = `R$: ${item.preco}`;
   botao.style.backgroundColor = estilo.corNomePrato;
   botao.style.borderColor = estilo.corNomePrato;
