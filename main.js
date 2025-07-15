@@ -191,7 +191,7 @@ function adicionarCard(item, estilo) {
   titulo.style.color = estilo.corNomePrato;
 
   const descricao = document.createElement("p");
-  descricao.classList.add("texto-descricao");
+  descricao.classList.add("titulo-principal");
   descricao.textContent = item.descricao;
   descricao.style.color = estilo.corDescricao;
 
