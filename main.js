@@ -100,10 +100,7 @@ const ENDPOINT_PRODUTOS = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET
 
 async function init() {
   try {
-    // Começar com a página invisível
-    document.body.style.opacity = '0'; 
-
-    // 1‑ Carregar estilo
+    // Carregar os dados de estilo e produtos
     const resEstilo = await fetch(ENDPOINT_ESTILO);
     const jsonEstilo = await resEstilo.json();
     const headers = jsonEstilo.values[0];
@@ -139,12 +136,10 @@ async function init() {
       adicionarCard({ categoria, imagem, titulo, descricao, preco }, estilo);
     });
 
-    // Depois de adicionar todos os cards, mostrar a página
+    // Garantir que a página se torne visível após o carregamento
     setTimeout(() => {
-      document.body.style.opacity = '1'; // Torna o body visível com transição
-      document.body.classList.add('visible'); // Aplica a classe de visibilidade
-      document.querySelectorAll(".sanduiches-section, .card").forEach(el => el.classList.add('visible'));  // Mostra as seções e cards
-    }, 100);  // Garantindo que o layout esteja pronto
+      document.body.classList.add('visible'); // Isso vai tornar a página visível de forma suave
+    }, 100);  // Espera garantir que o layout esteja pronto
 
   } catch (err) {
     console.error("Erro ao carregar dados da planilha:", err);

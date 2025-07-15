@@ -23,12 +23,18 @@
 }
 
 html, body {
-    
+    visibility: hidden;
     height: 100%;
     font-family: var(--fonte-principal);
     background-color: var(--cor-fundo);
     opacity: 0;
     transition: opacity 0.5s ease-in-out; /* Para evitar o piscar */
+}
+
+body.visible {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s ease; /* Transição de opacidade */
 }
 
 /* =====================================================
