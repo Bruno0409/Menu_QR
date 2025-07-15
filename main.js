@@ -100,7 +100,7 @@ const ENDPOINT_PRODUTOS = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET
 
 async function init() {
   try {
-    // Carregar os dados de estilo e produtos
+    // 1‑ Carregar estilo
     const resEstilo = await fetch(ENDPOINT_ESTILO);
     const jsonEstilo = await resEstilo.json();
     const headers = jsonEstilo.values[0];
@@ -135,13 +135,16 @@ async function init() {
       const [categoria, imagem, titulo, descricao, preco] = row;
       adicionarCard({ categoria, imagem, titulo, descricao, preco }, estilo);
     });
-
-    // Garantir que a página se torne visível após o carregamento
-    setTimeout(() => {
-      document.body.classList.add('visible'); // Isso vai tornar a página visível de forma suave
-    }, 100);  // Espera garantir que o layout esteja pronto
-
-  } catch (err) {
+    // ✅ Depois que todos os cards foram adicionados
+setTimeout(() => {
+  document.querySelectorAll(".sanduiches-cards").forEach((container) => {
+    const event = new Event("scroll");
+    container.dispatchEvent(event);
+  });
+}, 100); // espera para garantir que o layout atualize
+    
+  }
+  catch(err) {
     console.error("Erro ao carregar dados da planilha:", err);
   }
 }
@@ -210,4 +213,7 @@ function adicionarCard(item, estilo) {
   container.appendChild(card);
 }
 
+
 init();
+
+
