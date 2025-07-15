@@ -100,6 +100,9 @@ const ENDPOINT_PRODUTOS = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET
 
 async function init() {
   try {
+    // Começar com a página invisível
+    document.body.style.opacity = '0'; 
+
     // 1‑ Carregar estilo
     const resEstilo = await fetch(ENDPOINT_ESTILO);
     const jsonEstilo = await resEstilo.json();
@@ -135,24 +138,16 @@ async function init() {
       const [categoria, imagem, titulo, descricao, preco] = row;
       adicionarCard({ categoria, imagem, titulo, descricao, preco }, estilo);
     });
-    // ✅ Depois que todos os cards foram adicionados
-setTimeout(() => {
-  document.querySelectorAll(".sanduiches-cards").forEach((container) => {
-    const event = new Event("scroll");
-    container.dispatchEvent(event);
-  });
-}, 100); // espera para garantir que o layout atualize
-     
-    
-    document.body.style.opacity = '1';
 
-  }
-  catch(err) {
+    // Depois de adicionar todos os cards, mostrar a página
+    setTimeout(() => {
+      document.body.style.opacity = '1'; // Torna o body visível com transição
+      document.body.classList.add('visible'); // Aplica a classe de visibilidade
+      document.querySelectorAll(".sanduiches-section, .card").forEach(el => el.classList.add('visible'));  // Mostra as seções e cards
+    }, 100);  // Garantindo que o layout esteja pronto
+
+  } catch (err) {
     console.error("Erro ao carregar dados da planilha:", err);
-  } finally {
-    // ✅ Garante que o body sempre apareça, mesmo se der erro
-  
-    document.body.style.opacity = '1';
   }
 }
 
@@ -220,9 +215,4 @@ function adicionarCard(item, estilo) {
   container.appendChild(card);
 }
 
-
 init();
-
-document.body.style.visibility = 'visible';
-
-
